@@ -10,10 +10,16 @@ function reload() {
 async function fetchNews(query) {
     const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
     const data = await res.json();
-    bindData(data.articles);
+    if(data.articles){
+        bindData(data.articles);
+    }else{
+        console.log("No article found");
+    }
+    
 }
 
 function bindData(articles) {
+    if(!articles) return;
     const cardsContainer = document.getElementById("cards-container");
     const newsCardTemplate = document.getElementById("template-news-card");
 
